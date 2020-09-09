@@ -4,14 +4,17 @@
 
 # Step 1:
 # This is your Docker ID/path
-# dockerpath=<>
+dockerpath="candesign/api"
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-
+kubectl create deployment api --image=$dockerpath
 
 # Step 3:
 # List kubernetes pods
+kubectl get pods --all-namespaces
 
 # Step 4:
 # Forward the container port to a host
+kubectl expose deployment api --type="NodePort" --port=80
+kubectl port-forward deployment/api 8000:80
